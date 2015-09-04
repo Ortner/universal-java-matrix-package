@@ -80,8 +80,13 @@ public class DefaultSparseColumnObjectMatrix2D extends AbstractSparseObjectMatri
 	public void setObject(Object o, long row, long column) {
 		Matrix m = columns.get(column);
 		if (m == null) {
-			m = new DefaultSparseObjectMatrix(getRowCount(), 1);
-			columns.put(column, m);
+			synchronized(this){
+				m = columns.get(column);
+				if (m == null) {
+					m = new DefaultSparseObjectMatrix(getRowCount(), 1);
+					columns.put(column, m);
+				}
+			}
 		}
 		m.setAsObject(o, row, 0);
 	}

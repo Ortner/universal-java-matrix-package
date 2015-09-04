@@ -1523,11 +1523,16 @@ public abstract class AbstractMatrixTest {
 
 	@Test
 	public final void test0DivideXMatrix() throws Exception {
+		//for(int i=0;i<1000;i++){
+			//System.out.println("--- Testloop ---");
 		Matrix m1 = createMatrixWithAnnotation(5, 7);
 		Matrix m2 = createMatrixWithAnnotation(5, 7);
 		m2.randn(Ret.ORIG);
 		Matrix m3 = m1.divide(m2);
-		assertTrue(getLabel(), m3.isEmpty());
+		if(m2.containsDouble(0))
+			assertFalse(getLabel(), m2.containsDouble(0)); //missed value
+		if(!m3.isEmpty())
+			assertTrue(getLabel(), m3.isEmpty());
 
 		if (m1 instanceof Erasable) {
 			((Erasable) m1).erase();
@@ -1537,6 +1542,29 @@ public abstract class AbstractMatrixTest {
 		}
 		if (m3 instanceof Erasable) {
 			((Erasable) m3).erase();
+		}
+		//}
+	}
+	
+	@Test
+	public final void testStreamAccess() throws Exception {
+		for(int i=0;i<50;i++){
+			//System.out.println("--- Testloop ---");
+		Matrix m1 = createMatrixWithAnnotation(10, 15);
+		m1.plus(Ret.ORIG, true, 1.0);
+		
+		
+		if(m1.containsDouble(0))
+			assertFalse(getLabel(), m1.containsDouble(0)); //missed value
+
+		m1.minus(Ret.ORIG,false,1);
+
+		if(!m1.isEmpty())
+			assertTrue(getLabel(), m1.isEmpty());
+		
+		if (m1 instanceof Erasable) {
+			((Erasable) m1).erase();
+		}
 		}
 	}
 
