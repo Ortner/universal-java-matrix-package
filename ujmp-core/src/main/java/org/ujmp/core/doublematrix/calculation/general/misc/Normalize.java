@@ -70,4 +70,8 @@ public class Normalize extends AbstractDoubleCalculation {
 		return ret.getAsDouble(coordinates);
 	}
 
+	@Override
+	public boolean isParallelFlag() {
+		return true;
+	}
 }

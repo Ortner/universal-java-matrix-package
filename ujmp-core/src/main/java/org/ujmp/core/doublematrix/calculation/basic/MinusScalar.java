@@ -49,4 +49,8 @@ public class MinusScalar extends AbstractDoubleCalculation {
 				: getSources()[0].getAsDouble(coordinates) - value;
 	}
 
+	@Override
+	public boolean isParallelFlag() {
+		return true;
+	}
 }

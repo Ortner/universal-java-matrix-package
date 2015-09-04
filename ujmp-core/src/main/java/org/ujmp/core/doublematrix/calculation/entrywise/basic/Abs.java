@@ -37,4 +37,8 @@ public class Abs extends AbstractDoubleCalculation {
 		return Math.abs(getSource().getAsDouble(coordinates));
 	}
 
+	@Override
+	public boolean isParallelFlag() {
+		return true;
+	}
 }

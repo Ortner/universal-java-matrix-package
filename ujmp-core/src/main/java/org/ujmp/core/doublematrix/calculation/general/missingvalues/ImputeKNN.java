@@ -90,8 +90,11 @@ public class ImputeKNN extends AbstractDoubleCalculation {
 	}
 
 	public double getDouble(long... coordinates) {
+		//TODO massive sync
+		synchronized(this){
 		if (distanceMatrix == null) {
 			distanceMatrix = getDistanceMatrix();
+		}
 		}
 		double value = getSource().getAsDouble(coordinates);
 		if (MathUtil.isNaNOrInfinite(value)) {
@@ -110,4 +113,8 @@ public class ImputeKNN extends AbstractDoubleCalculation {
 		}
 	}
 
+	@Override
+	public boolean isParallelFlag() {
+		return true;
+	}
 }

@@ -83,6 +83,12 @@ public class Min extends AbstractDoubleCalculation {
 		return 0.0;
 	}
 
+	@Override
+	public boolean isParallelFlag() {
+		return true;
+	}
+	
+	
 	public long[] getSize() {
 		switch (getDimension()) {
 		case ROW:

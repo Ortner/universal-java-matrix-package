@@ -51,4 +51,9 @@ public class FadeOut extends AbstractDoubleCalculation {
 		}
 		return getSource().getAsDouble(coordinates) * factor;
 	}
+	
+	@Override
+	public boolean isParallelFlag() {
+		return true;
+	}
 }

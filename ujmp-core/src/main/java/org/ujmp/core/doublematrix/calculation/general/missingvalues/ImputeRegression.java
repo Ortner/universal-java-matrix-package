@@ -64,6 +64,12 @@ public class ImputeRegression extends AbstractDoubleCalculation {
 		}
 	}
 
+	@Override
+	public boolean isParallelFlag() {
+		//TODO check parallelization
+		return false;
+	}
+
 	private synchronized void createMatrix() {
 		try {
 			Matrix x = getSource();

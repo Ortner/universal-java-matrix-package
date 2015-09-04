@@ -37,4 +37,8 @@ public class LogisticFunction extends AbstractDoubleCalculation {
 		return 1.0 / (Math.exp(-getSource().getAsDouble(coordinates)) + 1.0);
 	}
 
+	@Override
+	public boolean isParallelFlag() {
+		return true;
+	}
 }

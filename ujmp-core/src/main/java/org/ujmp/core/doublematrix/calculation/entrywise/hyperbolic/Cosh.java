@@ -37,4 +37,8 @@ public class Cosh extends AbstractDoubleCalculation {
 		return Math.cosh(getSource().getAsDouble(coordinates));
 	}
 
+	@Override
+	public boolean isParallelFlag() {
+		return true;
+	}
 }

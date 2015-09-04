@@ -49,6 +49,8 @@ public class AddMissing extends AbstractDoubleCalculation {
 	}
 
 	public double getDouble(long... coordinates) {
+		//TODO massive synchronization loss?!
+		synchronized(this){
 		if (missingValues == null) {
 			missingValues = SparseDoubleMatrix2D.Factory.zeros(getSource().getRowCount(),
 					getSource().getColumnCount());
@@ -83,11 +85,17 @@ public class AddMissing extends AbstractDoubleCalculation {
 				}
 			}
 		}
+		}
 		if (MathUtil.isNaNOrInfinite(missingValues.getAsDouble(coordinates))) {
 			return Double.NaN;
 		} else {
 			return getSource().getAsDouble(coordinates);
 		}
+	}
+	
+	@Override
+	public boolean isParallelFlag() {
+		return true;
 	}
 
 }

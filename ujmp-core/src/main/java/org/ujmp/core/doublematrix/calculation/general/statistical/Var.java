@@ -57,8 +57,11 @@ public class Var extends AbstractDoubleCalculation {
 	}
 
 	public double getDouble(long... coordinates) {
+		//TODO PreCalc
+		synchronized(this){
 		if (mean == null) {
 			mean = new Mean(getDimension(), ignoreNaN, getSource()).calcNew();
+		}
 		}
 
 		double sum = 0;
@@ -148,6 +151,12 @@ public class Var extends AbstractDoubleCalculation {
 
 		}
 
+	}
+	
+
+	@Override
+	public boolean isParallelFlag() {
+		return true;
 	}
 
 	public long[] getSize() {

@@ -58,6 +58,11 @@ public class IndexOfMax extends AbstractDoubleCalculation {
 		}
 		return 0.0;
 	}
+	
+	@Override
+	public boolean isParallelFlag() {
+		return true;
+	}
 
 	public long[] getSize() {
 		switch (getDimension()) {

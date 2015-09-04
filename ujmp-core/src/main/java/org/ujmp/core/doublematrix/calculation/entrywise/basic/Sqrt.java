@@ -37,4 +37,8 @@ public class Sqrt extends AbstractDoubleCalculation {
 		return Math.sqrt(getSource().getAsDouble(coordinates));
 	}
 
+	@Override
+	public boolean isParallelFlag() {
+		return true;
+	}
 }

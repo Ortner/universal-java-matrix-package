@@ -37,4 +37,8 @@ public class Ceil extends AbstractDoubleCalculation {
 		return Math.ceil(getSource().getAsDouble(coordinates));
 	}
 
+	@Override
+	public boolean isParallelFlag() {
+		return true;
+	}
 }

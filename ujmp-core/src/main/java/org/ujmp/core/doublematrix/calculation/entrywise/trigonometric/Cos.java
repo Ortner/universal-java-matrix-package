@@ -37,4 +37,8 @@ public class Cos extends AbstractDoubleCalculation {
 		return Math.cos(getSource().getAsDouble(coordinates));
 	}
 
+	@Override
+	public boolean isParallelFlag() {
+		return true;
+	}
 }

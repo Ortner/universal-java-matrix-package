@@ -51,4 +51,8 @@ public class Range extends AbstractDoubleCalculation {
 		return new long[] { 1, cols };
 	}
 
+	@Override
+	public boolean isParallelFlag() {
+		return true;
+	}
 }

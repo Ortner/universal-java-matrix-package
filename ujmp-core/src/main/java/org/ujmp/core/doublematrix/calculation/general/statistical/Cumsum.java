@@ -40,8 +40,11 @@ public class Cumsum extends AbstractDoubleCalculation {
 	}
 
 	public double getDouble(long... coordinates) {
+		//TODO massive sync
+		synchronized(this){
 		if (cumsum == null) {
 			createMatrix();
+		}
 		}
 		return cumsum.getAsDouble(coordinates);
 	}
@@ -58,5 +61,11 @@ public class Cumsum extends AbstractDoubleCalculation {
 			}
 		}
 		cumsum = m;
+	}
+	
+	@Override
+	public boolean isParallelFlag() {
+		//TODO stream createMatrix
+		return true;
 	}
 }

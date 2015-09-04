@@ -74,4 +74,8 @@ public class Atimes extends AbstractDoubleCalculation {
 		return size;
 	}
 
+	@Override
+	public boolean isParallelFlag() {
+		return true;
+	}
 }

@@ -49,5 +49,12 @@ public class MinkowskiDistance extends AbstractDoubleCalculation {
 	public long[] getSize() {
 		return size;
 	}
+	
+
+	@Override
+	public boolean isParallelFlag() {
+		//TODO check minDist function
+		return false;
+	}
 
 }

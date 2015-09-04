@@ -42,5 +42,10 @@ public class ImputeZero extends AbstractDoubleCalculation {
 			return v;
 		}
 	}
+	
+	@Override
+	public boolean isParallelFlag() {
+		return true;
+	}
 
 }

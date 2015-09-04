@@ -173,4 +173,12 @@ public class MutualInformation extends AbstractDoubleCalculation {
 		return result;
 	}
 
+
+	@Override
+	public boolean isParallelFlag() {
+		//TODO not used
+		return true;
+	}
+	
+	
 }

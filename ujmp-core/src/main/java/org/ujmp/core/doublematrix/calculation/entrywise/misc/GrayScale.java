@@ -51,4 +51,9 @@ public class GrayScale extends AbstractDoubleCalculation {
 			return (value & 0xFF) / 255.0;
 		}
 	}
+	
+	@Override
+	public boolean isParallelFlag() {
+		return true;
+	}
 }

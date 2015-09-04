@@ -57,13 +57,15 @@ public class Mean extends AbstractDoubleCalculation {
 	}
 
 	public double getDouble(long... coordinates) {
+		//TODO PreCalc
+		synchronized(this){
 		if (sum == null) {
 			sum = new Sum(getDimension(), ignoreNaN, getSource()).calcNew();
 		}
 		if (ignoreNaN && missingCount == null) {
 			missingCount = new CountMissing(getDimension(), getSource()).calcNew();
 		}
-
+		}
 		if (ignoreNaN) {
 			switch (getDimension()) {
 			case ALL:
@@ -98,6 +100,11 @@ public class Mean extends AbstractDoubleCalculation {
 		}
 	}
 
+	@Override
+	public boolean isParallelFlag() {
+		return true;
+	}
+	
 	public long[] getSize() {
 		switch (getDimension()) {
 		case ROW:

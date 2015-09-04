@@ -100,4 +100,12 @@ public abstract class AbstractDoubleCalculation extends AbstractCalculation impl
 		return ValueType.DOUBLE;
 	}
 
+
+	/**
+	 * This method indicates whether this calculation is thread safe or not
+	 * 
+	 * @return the flag
+	 */
+	public abstract boolean isParallelFlag();
+	
 }

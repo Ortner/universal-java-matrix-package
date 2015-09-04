@@ -72,4 +72,9 @@ public class CountMissing extends AbstractDoubleCalculation {
 		return null;
 	}
 
+	@Override
+	public boolean isParallelFlag() {
+		return true;
+	}
+
 }

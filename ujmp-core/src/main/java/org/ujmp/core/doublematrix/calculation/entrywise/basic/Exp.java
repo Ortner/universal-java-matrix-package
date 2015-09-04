@@ -37,4 +37,8 @@ public class Exp extends AbstractDoubleCalculation {
 		return Math.exp(getSource().getAsDouble(coordinates));
 	}
 
+	@Override
+	public boolean isParallelFlag() {
+		return true;
+	}
 }

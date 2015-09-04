@@ -40,8 +40,11 @@ public class Cumprod extends AbstractDoubleCalculation {
 	}
 
 	public double getDouble(long... coordinates) {
+		//TODO massive sync
+		synchronized(this){
 		if (cumprod == null) {
 			createMatrix();
+		}
 		}
 		return cumprod.getAsDouble(coordinates);
 	}
@@ -62,4 +65,11 @@ public class Cumprod extends AbstractDoubleCalculation {
 		cumprod = m;
 	}
 
+
+	@Override
+	public boolean isParallelFlag() {
+		//TODO stream create Matrix
+		return true;
+	}
+	
 }

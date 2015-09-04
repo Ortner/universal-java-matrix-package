@@ -48,4 +48,9 @@ public class Princomp extends AbstractDoubleCalculation {
 		return pca.getAsDouble(coordinates);
 	}
 
+	@Override
+	public boolean isParallelFlag() {
+		return false;
+	}
+
 }

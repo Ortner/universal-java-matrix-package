@@ -37,4 +37,8 @@ public class Round extends AbstractDoubleCalculation {
 		return Math.round(getSource().getAsDouble(coordinates));
 	}
 
+	@Override
+	public boolean isParallelFlag() {
+		return true;
+	}
 }

@@ -38,8 +38,11 @@ public class ImputeMean extends AbstractDoubleCalculation {
 	}
 
 	public double getDouble(long... coordinates) {
-		if (mean == null) {
-			mean = new Mean(getDimension(), true, getSource()).calcNew();
+		//TODO sync
+		synchronized(this){
+			if (mean == null) {
+				mean = new Mean(getDimension(), true, getSource()).calcNew();
+			}
 		}
 		double v = getSource().getAsDouble(coordinates);
 		if (MathUtil.isNaNOrInfinite(v)) {
@@ -55,6 +58,11 @@ public class ImputeMean extends AbstractDoubleCalculation {
 			return v;
 		}
 		return 0.0;
+	}
+
+	@Override
+	public boolean isParallelFlag() {
+		return true;
 	}
 
 }

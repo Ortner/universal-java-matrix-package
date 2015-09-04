@@ -37,4 +37,8 @@ public class Log extends AbstractDoubleCalculation {
 		return Math.log(getSource().getAsDouble(coordinates));
 	}
 
+	@Override
+	public boolean isParallelFlag() {
+		return true;
+	}
 }

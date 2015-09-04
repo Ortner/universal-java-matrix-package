@@ -46,4 +46,8 @@ public class Power extends AbstractDoubleCalculation {
 				getSources()[1].getAsDouble(coordinates));
 	}
 
+	@Override
+	public boolean isParallelFlag() {
+		return true;
+	}
 }
