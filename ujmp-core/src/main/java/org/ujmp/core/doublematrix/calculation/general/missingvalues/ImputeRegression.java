@@ -54,7 +54,11 @@ public class ImputeRegression extends AbstractDoubleCalculation {
 
 	public synchronized double getDouble(long... coordinates) {
 		if (imputed == null) {
-			createMatrix();
+			synchronized(this){
+				if(imputed==null){
+					createMatrix();
+				}
+			}
 		}
 		double v = getSource().getAsDouble(coordinates);
 		if (MathUtil.isNaNOrInfinite(v)) {
@@ -66,8 +70,7 @@ public class ImputeRegression extends AbstractDoubleCalculation {
 
 	@Override
 	public boolean isParallelFlag() {
-		//TODO check parallelization
-		return false;
+		return true;
 	}
 
 	private synchronized void createMatrix() {

@@ -39,31 +39,38 @@ public class Normalize extends AbstractDoubleCalculation {
 
 	public double getDouble(long... coordinates) {
 		if (ret == null) {
-			Matrix max = new Max(getDimension(), getSource()).calcNew();
-			Matrix min = new Min(getDimension(), getSource()).calcNew();
-			Matrix range = max.minus(min);
-			Matrix diff = null;
-			switch (getDimension()) {
-			case ROW:
-				diff = getSource().minus(Matrix.Factory.vertCat(min, getSource().getRowCount()));
-				break;
-			case COLUMN:
-				diff = getSource().minus(Matrix.Factory.horCat(min, getSource().getColumnCount()));
-				break;
-			default:
-				diff = getSource().minus(min);
-				break;
-			}
-			switch (getDimension()) {
-			case ROW:
-				ret = diff.divide(Matrix.Factory.vertCat(range, getSource().getRowCount()));
-				break;
-			case COLUMN:
-				ret = diff.divide(Matrix.Factory.horCat(range, getSource().getColumnCount()));
-				break;
-			default:
-				ret = diff.divide(range);
-				break;
+			synchronized (this) {
+				if (ret == null) {
+					Matrix max = new Max(getDimension(), getSource()).calcNew();
+					Matrix min = new Min(getDimension(), getSource()).calcNew();
+					Matrix range = max.minus(min);
+					Matrix diff = null;
+					switch (getDimension()) {
+					case ROW:
+						diff = getSource().minus(
+								Matrix.Factory.vertCat(min, getSource().getRowCount()));
+						break;
+					case COLUMN:
+						diff = getSource().minus(
+								Matrix.Factory.horCat(min, getSource().getColumnCount()));
+						break;
+					default:
+						diff = getSource().minus(min);
+						break;
+					}
+					switch (getDimension()) {
+					case ROW:
+						ret = diff.divide(Matrix.Factory.vertCat(range, getSource().getRowCount()));
+						break;
+					case COLUMN:
+						ret = diff.divide(Matrix.Factory
+								.horCat(range, getSource().getColumnCount()));
+						break;
+					default:
+						ret = diff.divide(range);
+						break;
+					}
+				}
 			}
 		}
 

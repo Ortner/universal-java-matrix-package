@@ -48,7 +48,7 @@ public class ImputeBPCA extends AbstractDoubleCalculation {
 	}
 
 	public double getDouble(long... coordinates) {
-		//TODO massive sync
+		if(imp==null){
 		synchronized(this){
 		if (imp == null) {
 			try {
@@ -73,6 +73,7 @@ public class ImputeBPCA extends AbstractDoubleCalculation {
 			} catch (Exception e) {
 				throw new RuntimeException(e);
 			}
+		}
 		}
 		}
 		return imp.getAsDouble(coordinates);

@@ -57,9 +57,11 @@ public class TfIdf extends AbstractDoubleCalculation {
 	}
 
 	public double getDouble(long... coordinates) {
-		synchronized(this){
-			if (docTerm == null) {
-				calculate();
+		if(docTerm == null){
+			synchronized(this){
+				if (docTerm == null) {
+					calculate();
+				}
 			}
 		}
 		double tf = docTerm.getAsDouble(coordinates);

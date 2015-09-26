@@ -56,12 +56,11 @@ public class Std extends AbstractDoubleCalculation {
 	}
 
 	public double getDouble(long... coordinates) {
-		//TODO massive sync
+		if (variance == null) {
 		synchronized(this){
 		if (variance == null) {
 			variance = new Var(getDimension(), ignoreNaN, getSource(), besselsCorrection).calcNew();
-		}
-		}
+		}}}
 		return Math.sqrt(variance.getAsDouble(coordinates));
 	}
 

@@ -53,8 +53,7 @@ public class MinkowskiDistance extends AbstractDoubleCalculation {
 
 	@Override
 	public boolean isParallelFlag() {
-		//TODO check minDist function
-		return false;
+		return true;
 	}
 
 }

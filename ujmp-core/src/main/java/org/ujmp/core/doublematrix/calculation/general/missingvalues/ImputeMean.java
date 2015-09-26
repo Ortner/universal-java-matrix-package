@@ -38,12 +38,12 @@ public class ImputeMean extends AbstractDoubleCalculation {
 	}
 
 	public double getDouble(long... coordinates) {
-		//TODO sync
+		if (mean == null) {
 		synchronized(this){
 			if (mean == null) {
 				mean = new Mean(getDimension(), true, getSource()).calcNew();
 			}
-		}
+		}}
 		double v = getSource().getAsDouble(coordinates);
 		if (MathUtil.isNaNOrInfinite(v)) {
 			switch (getDimension()) {

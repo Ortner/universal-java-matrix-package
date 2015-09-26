@@ -69,10 +69,12 @@ public class ImputeEM extends AbstractDoubleCalculation {
 	}
 
 	public double getDouble(long... coordinates) {
-		synchronized(this){
 		if (imputed == null) {
-			createMatrix();
-		}
+			synchronized (this) {
+				if (imputed == null) {
+					createMatrix();
+				}
+			}
 		}
 		double v = getSource().getAsDouble(coordinates);
 		if (MathUtil.isNaNOrInfinite(v)) {

@@ -40,18 +40,18 @@ public class Cumprod extends AbstractDoubleCalculation {
 	}
 
 	public double getDouble(long... coordinates) {
-		//TODO massive sync
+		if (cumprod == null) {
 		synchronized(this){
 		if (cumprod == null) {
 			createMatrix();
-		}
-		}
+		}}}
 		return cumprod.getAsDouble(coordinates);
 	}
 
 	private void createMatrix() {
 		Matrix source = getSource();
 		Matrix m = Matrix.Factory.zeros(source.getSize());
+		//TODO Stream for
 		for (long c = 0; c < source.getColumnCount(); c++) {
 			double prod = 1;
 			for (long r = 0; r < source.getRowCount(); r++) {

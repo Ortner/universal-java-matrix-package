@@ -54,7 +54,7 @@ public class Cov extends AbstractDoubleCalculation {
 		double deltaX = 0.0;
 		double deltaY = 0.0;
 
-		if (mean == null) { //Thread-safe? read while write?!
+		if (mean == null) {
 			synchronized (this) {
 				if (mean == null) {
 					mean = new Mean(ROW, ignoreNaN, getSource()).calc(Ret.NEW);

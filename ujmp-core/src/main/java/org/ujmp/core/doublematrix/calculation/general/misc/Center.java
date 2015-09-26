@@ -40,9 +40,11 @@ public class Center extends AbstractDoubleCalculation {
 	}
 
 	public double getDouble(long... coordinates) {
-		synchronized(this){
-			if (mean == null) {
-				mean = new Mean(getDimension(), ignoreNaN, getSource()).calcNew();
+		if (mean == null) {
+			synchronized(this){
+				if (mean == null) {
+					mean = new Mean(getDimension(), ignoreNaN, getSource()).calcNew();
+				}
 			}
 		}
 		switch (getDimension()) {

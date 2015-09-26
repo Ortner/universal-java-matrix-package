@@ -35,6 +35,7 @@ public class CountMissing extends AbstractDoubleCalculation {
 	}
 
 	public double getDouble(long... coordinates) {
+		//TODO stream for ops
 		double sum = 0;
 		switch (getDimension()) {
 		case ROW:

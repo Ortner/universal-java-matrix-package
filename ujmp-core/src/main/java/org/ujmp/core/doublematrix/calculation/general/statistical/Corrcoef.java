@@ -55,12 +55,12 @@ public class Corrcoef extends AbstractDoubleCalculation {
 			return 1.0;
 		}
 
-		//TODO PreCalc
+		if(mean==null){
 		synchronized(this){
 			if (mean == null) {
 				mean = new Mean(ROW, ignoreNaN, getSource()).calc(Ret.NEW);
 			}
-		}
+		}}
 
 		if (ignoreNaN) {
 

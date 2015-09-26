@@ -56,7 +56,9 @@ public class DiscretizeToColumns extends AbstractDoubleCalculation {
 	}
 
 	public double getDouble(long... coordinates) {
-		countValues();
+		if(values==null){
+			countValues();
+		}
 		if (coordinates[COLUMN] < column) {
 			return getSource().getAsDouble(coordinates);
 		} else if (coordinates[COLUMN] >= column + values.size()) {

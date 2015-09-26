@@ -57,12 +57,11 @@ public class Var extends AbstractDoubleCalculation {
 	}
 
 	public double getDouble(long... coordinates) {
-		//TODO PreCalc
+		if (mean == null) {
 		synchronized(this){
 		if (mean == null) {
 			mean = new Mean(getDimension(), ignoreNaN, getSource()).calcNew();
-		}
-		}
+		}}}
 
 		double sum = 0;
 
