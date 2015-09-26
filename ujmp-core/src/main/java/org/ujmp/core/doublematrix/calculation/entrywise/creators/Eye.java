@@ -37,4 +37,8 @@ public class Eye extends AbstractDoubleCalculation {
 		return coordinates[ROW] == coordinates[COLUMN] ? 1.0 : 0.0;
 	}
 
+	@Override
+	public boolean isParallelFlag() {
+		return true;
+	}
 }

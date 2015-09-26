@@ -41,7 +41,11 @@ public class Center extends AbstractDoubleCalculation {
 
 	public double getDouble(long... coordinates) {
 		if (mean == null) {
-			mean = new Mean(getDimension(), ignoreNaN, getSource()).calcNew();
+			synchronized(this){
+				if (mean == null) {
+					mean = new Mean(getDimension(), ignoreNaN, getSource()).calcNew();
+				}
+			}
 		}
 		switch (getDimension()) {
 		case ALL:
@@ -52,6 +56,11 @@ public class Center extends AbstractDoubleCalculation {
 			return getSource().getAsDouble(coordinates) - mean.getAsDouble(coordinates[ROW], 0);
 		}
 		return Double.NaN;
+	}
+
+	@Override
+	public boolean isParallelFlag() {
+		return true;
 	}
 
 }

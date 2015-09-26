@@ -83,6 +83,12 @@ public class Min extends AbstractDoubleCalculation {
 		return 0.0;
 	}
 
+	@Override
+	public boolean isParallelFlag() {
+		return true;
+	}
+	
+	
 	public long[] getSize() {
 		switch (getDimension()) {
 		case ROW:
@@ -99,6 +105,7 @@ public class Min extends AbstractDoubleCalculation {
 	public static double calc(Matrix m) {
 		double min = Double.MAX_VALUE;
 		double v = 0.0;
+		//TODO stream for
 		for (long[] c : m.availableCoordinates()) {
 			min = (v = m.getAsDouble(c)) < min ? v : min;
 		}

@@ -47,4 +47,8 @@ public class MinusMatrix extends AbstractDoubleCalculation {
 				.getAsDouble(coordinates) - getSources()[1].getAsDouble(coordinates);
 	}
 
+	@Override
+	public boolean isParallelFlag() {
+		return true;
+	}
 }

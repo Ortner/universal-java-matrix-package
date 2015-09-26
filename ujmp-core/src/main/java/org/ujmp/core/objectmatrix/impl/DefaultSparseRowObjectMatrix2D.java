@@ -102,8 +102,13 @@ public class DefaultSparseRowObjectMatrix2D extends AbstractSparseObjectMatrix2D
 		Matrix m = rows.get(row);
 		if (m == null) {
 			// TODO: there should be a faster implementation than this:
-			m = new DefaultSparseObjectMatrix((long) 1, getColumnCount());
-			rows.put(row, m);
+			synchronized(this){
+				m = rows.get(row);
+				if(m==null){
+					m = new DefaultSparseObjectMatrix((long) 1, getColumnCount());
+					rows.put(row, m);
+				}
+			}
 		}
 		m.setAsObject(o, 0, column);
 	}

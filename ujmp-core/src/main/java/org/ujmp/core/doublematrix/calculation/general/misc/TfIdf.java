@@ -57,10 +57,13 @@ public class TfIdf extends AbstractDoubleCalculation {
 	}
 
 	public double getDouble(long... coordinates) {
-		if (docTerm == null) {
-			calculate();
+		if(docTerm == null){
+			synchronized(this){
+				if (docTerm == null) {
+					calculate();
+				}
+			}
 		}
-
 		double tf = docTerm.getAsDouble(coordinates);
 		double idf = 1.0;
 
@@ -86,6 +89,11 @@ public class TfIdf extends AbstractDoubleCalculation {
 		if (calculateIdf) {
 			sumPerTerm = docTerm.toBooleanMatrix().sum(Ret.NEW, Matrix.ROW, true);
 		}
+	}
+
+	@Override
+	public boolean isParallelFlag() {
+		return true;
 	}
 
 	public long[] getSize() {

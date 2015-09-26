@@ -58,6 +58,11 @@ public class Diff extends AbstractDoubleCalculation {
 			return v2 - v1;
 		}
 	}
+	
+	@Override
+	public boolean isParallelFlag() {
+		return true;
+	}
 
 	public long[] getSize() {
 		switch (getDimension()) {

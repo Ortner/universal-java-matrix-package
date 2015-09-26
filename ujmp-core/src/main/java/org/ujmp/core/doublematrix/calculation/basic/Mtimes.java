@@ -66,4 +66,9 @@ public class Mtimes extends AbstractDoubleCalculation {
 		return size;
 	}
 
+	@Override
+	public boolean isParallelFlag() {
+		return true;
+	}
+
 }

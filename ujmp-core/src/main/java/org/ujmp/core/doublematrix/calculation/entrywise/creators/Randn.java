@@ -48,4 +48,8 @@ public class Randn extends AbstractDoubleCalculation {
 		return MathUtil.nextGaussian(mean, sigma);
 	}
 
+	@Override
+	public boolean isParallelFlag() {
+		return true;
+	}
 }

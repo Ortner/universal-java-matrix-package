@@ -37,4 +37,8 @@ public class NaNs extends AbstractDoubleCalculation {
 		return Double.NaN;
 	}
 
+	@Override
+	public boolean isParallelFlag() {
+		return true;
+	}
 }

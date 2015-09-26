@@ -37,4 +37,8 @@ public class Sin extends AbstractDoubleCalculation {
 		return Math.sin(getSource().getAsDouble(coordinates));
 	}
 
+	@Override
+	public boolean isParallelFlag() {
+		return true;
+	}
 }

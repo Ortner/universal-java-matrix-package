@@ -73,8 +73,13 @@ public class DefaultSparseRowDoubleMatrix2D extends AbstractSparseDoubleMatrix2D
 	public void setDouble(double o, long row, long column) {
 		DefaultSparseDoubleVector1D m = rows.get(row);
 		if (m == null) {
-			m = new DefaultSparseDoubleVector1D(1l, getColumnCount());
-			rows.put(row, m);
+			synchronized(this){
+				m = rows.get(row);
+				if (m == null) {
+					m = new DefaultSparseDoubleVector1D(1l, getColumnCount());
+					rows.put(row, m);
+				}
+			}
 		}
 		m.setAsDouble(o, 0, column);
 	}

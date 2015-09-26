@@ -53,6 +53,8 @@ public class ImputeLS extends AbstractDoubleCalculation {
 
 	public double getDouble(long... coordinates) {
 		if (imp == null) {
+		synchronized(this){
+		if (imp == null) {
 			try {
 
 				DoubleCalculation calc = null;
@@ -76,7 +78,14 @@ public class ImputeLS extends AbstractDoubleCalculation {
 			} catch (Exception e) {
 				throw new RuntimeException(e);
 			}
-		}
+		}}}
 		return imp.getAsDouble(coordinates);
 	}
+
+	@Override
+	public boolean isParallelFlag() {
+		return true;
+	}
+	
+	
 }

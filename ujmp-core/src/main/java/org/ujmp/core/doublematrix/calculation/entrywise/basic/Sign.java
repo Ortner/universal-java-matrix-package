@@ -37,4 +37,8 @@ public class Sign extends AbstractDoubleCalculation {
 		return Math.signum(getSource().getAsDouble(coordinates));
 	}
 
+	@Override
+	public boolean isParallelFlag() {
+		return true;
+	}
 }

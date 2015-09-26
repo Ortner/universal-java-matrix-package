@@ -35,6 +35,7 @@ public class CountMissing extends AbstractDoubleCalculation {
 	}
 
 	public double getDouble(long... coordinates) {
+		//TODO stream for ops
 		double sum = 0;
 		switch (getDimension()) {
 		case ROW:
@@ -70,6 +71,11 @@ public class CountMissing extends AbstractDoubleCalculation {
 			return new long[] { 1, 1 };
 		}
 		return null;
+	}
+
+	@Override
+	public boolean isParallelFlag() {
+		return true;
 	}
 
 }

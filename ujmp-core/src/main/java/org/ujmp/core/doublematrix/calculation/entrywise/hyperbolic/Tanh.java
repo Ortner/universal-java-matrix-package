@@ -37,4 +37,8 @@ public class Tanh extends AbstractDoubleCalculation {
 		return Math.tanh(getSource().getAsDouble(coordinates));
 	}
 
+	@Override
+	public boolean isParallelFlag() {
+		return true;
+	}
 }

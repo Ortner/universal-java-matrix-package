@@ -56,7 +56,9 @@ public class DiscretizeToColumns extends AbstractDoubleCalculation {
 	}
 
 	public double getDouble(long... coordinates) {
-		countValues();
+		if(values==null){
+			countValues();
+		}
 		if (coordinates[COLUMN] < column) {
 			return getSource().getAsDouble(coordinates);
 		} else if (coordinates[COLUMN] >= column + values.size()) {
@@ -93,7 +95,7 @@ public class DiscretizeToColumns extends AbstractDoubleCalculation {
 		}
 	}
 
-	private void countValues() {
+	private synchronized void countValues() {
 		if (values == null) {
 			Set<Object> set = new TreeSet<Object>();
 			for (long row = getSource().getRowCount(); --row >= 0;) {
@@ -117,4 +119,8 @@ public class DiscretizeToColumns extends AbstractDoubleCalculation {
 		size[COLUMN] += values.size() - 1;
 	}
 
+	@Override
+	public boolean isParallelFlag() {
+		return true;
+	}
 }

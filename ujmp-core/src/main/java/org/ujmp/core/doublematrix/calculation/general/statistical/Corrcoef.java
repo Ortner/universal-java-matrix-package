@@ -55,9 +55,12 @@ public class Corrcoef extends AbstractDoubleCalculation {
 			return 1.0;
 		}
 
-		if (mean == null) {
-			mean = new Mean(ROW, ignoreNaN, getSource()).calc(Ret.NEW);
-		}
+		if(mean==null){
+		synchronized(this){
+			if (mean == null) {
+				mean = new Mean(ROW, ignoreNaN, getSource()).calc(Ret.NEW);
+			}
+		}}
 
 		if (ignoreNaN) {
 
@@ -108,4 +111,10 @@ public class Corrcoef extends AbstractDoubleCalculation {
 		return new long[] { getSource().getColumnCount(), getSource().getColumnCount() };
 	}
 
+	@Override
+	public boolean isParallelFlag() {
+		return true;
+	}
+	
+	
 }

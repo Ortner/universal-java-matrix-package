@@ -126,6 +126,7 @@ public class MutualInformation extends AbstractDoubleCalculation {
 		// int[][] matrixInt = matrix.toIntArray();
 		Arrays.fill(d_dc, (int) matrix.getMaxValue() + 1);
 		int aVal, bVal;
+		//TODO stream for simple
 		for (int a = 0; a < count; a++) {
 			for (int b = 0; b <= a; b++) {
 				double mutual = 0;
@@ -173,4 +174,11 @@ public class MutualInformation extends AbstractDoubleCalculation {
 		return result;
 	}
 
+
+	@Override
+	public boolean isParallelFlag() {
+		return true;
+	}
+	
+	
 }

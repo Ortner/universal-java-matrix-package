@@ -37,4 +37,8 @@ public class Sinh extends AbstractDoubleCalculation {
 		return Math.sinh(getSource().getAsDouble(coordinates));
 	}
 
+	@Override
+	public boolean isParallelFlag() {
+		return true;
+	}
 }

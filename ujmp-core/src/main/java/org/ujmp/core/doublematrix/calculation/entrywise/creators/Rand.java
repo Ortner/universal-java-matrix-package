@@ -48,4 +48,8 @@ public class Rand extends AbstractDoubleCalculation {
 		return MathUtil.nextDouble(min, max);
 	}
 
+	@Override
+	public boolean isParallelFlag() {
+		return true;
+	}
 }

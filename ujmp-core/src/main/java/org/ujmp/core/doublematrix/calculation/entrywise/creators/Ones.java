@@ -37,4 +37,8 @@ public class Ones extends AbstractDoubleCalculation {
 		return 1.0;
 	}
 
+	@Override
+	public boolean isParallelFlag() {
+		return true;
+	}
 }

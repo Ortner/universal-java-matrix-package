@@ -37,4 +37,8 @@ public class Tan extends AbstractDoubleCalculation {
 		return Math.tan(getSource().getAsDouble(coordinates));
 	}
 
+	@Override
+	public boolean isParallelFlag() {
+		return true;
+	}
 }

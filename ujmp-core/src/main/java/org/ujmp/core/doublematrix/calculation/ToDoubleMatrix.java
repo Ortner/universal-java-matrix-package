@@ -40,4 +40,9 @@ public class ToDoubleMatrix extends AbstractDoubleCalculation {
 		getSource().setAsDouble(value, coordinates);
 	}
 
+	@Override
+	public boolean isParallelFlag() {
+		return true;
+	}
+
 }

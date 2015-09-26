@@ -50,35 +50,40 @@ public class AddMissing extends AbstractDoubleCalculation {
 
 	public double getDouble(long... coordinates) {
 		if (missingValues == null) {
-			missingValues = SparseDoubleMatrix2D.Factory.zeros(getSource().getRowCount(),
-					getSource().getColumnCount());
+			synchronized (this) {
+				if (missingValues == null) {
+					missingValues = SparseDoubleMatrix2D.Factory.zeros(getSource().getRowCount(),
+							getSource().getColumnCount());
 
-			switch (getDimension()) {
-			case ALL:
-				int count = (int) (percentMissing[0] * Coordinates.product(getSource().getSize()));
-				for (int i = 0; i < count; i++) {
-					double v = 0.0;
-					int r = 0;
-					int c = 0;
-					do {
-						r = MathUtil.nextInteger(0, (int) getSource().getRowCount());
-						c = MathUtil.nextInteger(0, (int) getSource().getColumnCount());
-						v = missingValues.getAsDouble(r, c);
-					} while (MathUtil.isNaNOrInfinite(v));
-					missingValues.setAsDouble(Double.NaN, r, c);
-				}
-				break;
-			case COLUMN:
-				int missingCount = (int) (getSource().getColumnCount() * percentMissing[0]);
-				for (long r = getSource().getRowCount() - 1; r != -1; r--) {
-					for (int i = 0; i < missingCount; i++) {
-						double v = 0.0;
-						int c = 0;
-						do {
-							c = MathUtil.nextInteger(0, (int) getSource().getColumnCount());
-							v = missingValues.getAsDouble(r, c);
-						} while (MathUtil.isNaNOrInfinite(v));
-						missingValues.setAsDouble(Double.NaN, r, c);
+					switch (getDimension()) {
+					case ALL:
+						int count = (int) (percentMissing[0] * Coordinates.product(getSource()
+								.getSize()));
+						for (int i = 0; i < count; i++) {
+							double v = 0.0;
+							int r = 0;
+							int c = 0;
+							do {
+								r = MathUtil.nextInteger(0, (int) getSource().getRowCount());
+								c = MathUtil.nextInteger(0, (int) getSource().getColumnCount());
+								v = missingValues.getAsDouble(r, c);
+							} while (MathUtil.isNaNOrInfinite(v));
+							missingValues.setAsDouble(Double.NaN, r, c);
+						}
+						break;
+					case COLUMN:
+						int missingCount = (int) (getSource().getColumnCount() * percentMissing[0]);
+						for (long r = getSource().getRowCount() - 1; r != -1; r--) {
+							for (int i = 0; i < missingCount; i++) {
+								double v = 0.0;
+								int c = 0;
+								do {
+									c = MathUtil.nextInteger(0, (int) getSource().getColumnCount());
+									v = missingValues.getAsDouble(r, c);
+								} while (MathUtil.isNaNOrInfinite(v));
+								missingValues.setAsDouble(Double.NaN, r, c);
+							}
+						}
 					}
 				}
 			}
@@ -88,6 +93,11 @@ public class AddMissing extends AbstractDoubleCalculation {
 		} else {
 			return getSource().getAsDouble(coordinates);
 		}
+	}
+	
+	@Override
+	public boolean isParallelFlag() {
+		return true;
 	}
 
 }

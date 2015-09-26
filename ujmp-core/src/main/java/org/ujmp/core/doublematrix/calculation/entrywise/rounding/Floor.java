@@ -37,4 +37,8 @@ public class Floor extends AbstractDoubleCalculation {
 		return Math.floor(getSource().getAsDouble(coordinates));
 	}
 
+	@Override
+	public boolean isParallelFlag() {
+		return true;
+	}
 }

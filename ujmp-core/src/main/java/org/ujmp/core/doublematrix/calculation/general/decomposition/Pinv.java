@@ -23,6 +23,8 @@
 
 package org.ujmp.core.doublematrix.calculation.general.decomposition;
 
+import java.util.stream.StreamSupport;
+
 import org.ujmp.core.Coordinates;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.doublematrix.calculation.AbstractDoubleCalculation;
@@ -45,6 +47,8 @@ public class Pinv extends AbstractDoubleCalculation {
 			Matrix s = usv[1];
 			Matrix v = usv[2];
 
+			
+			//TODO should be streamed!
 			for (int i = (int) Math.min(s.getRowCount(), s.getColumnCount()); --i >= 0;) {
 				double d = s.getAsDouble(i, i);
 				if (Math.abs(d) > UJMPSettings.getInstance().getTolerance()) {
@@ -64,4 +68,9 @@ public class Pinv extends AbstractDoubleCalculation {
 		return Coordinates.transpose(getSource().getSize());
 	}
 
+
+	@Override
+	public boolean isParallelFlag() {
+		return false;
+	}
 }

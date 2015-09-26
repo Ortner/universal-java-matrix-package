@@ -84,7 +84,7 @@ public abstract class AbstractDoubleCalculation extends AbstractCalculation impl
 	protected Matrix doCalc(Matrix matrix){
 		//System.out.println("Matrix function called");
 		Spliterator<long[]> split=matrix.allCoordinates().spliterator();
-		StreamSupport.stream(split, true).forEach(c->matrix.setAsDouble(getDouble(c), c));
+		StreamSupport.stream(split, this.isParallelFlag()).forEach(c->matrix.setAsDouble(getDouble(c), c));
 		
 		return matrix;
 	}
@@ -100,4 +100,12 @@ public abstract class AbstractDoubleCalculation extends AbstractCalculation impl
 		return ValueType.DOUBLE;
 	}
 
+
+	/**
+	 * This method indicates whether this calculation is thread safe or not
+	 * 
+	 * @return the flag
+	 */
+	public abstract boolean isParallelFlag();
+	
 }

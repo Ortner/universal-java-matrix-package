@@ -25,6 +25,7 @@ package org.ujmp.core.util;
 
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.concurrent.locks.StampedLock;
 
 import org.ujmp.core.Matrix;
 import org.ujmp.core.doublematrix.stub.AbstractSparseDoubleMatrix2D;
@@ -40,6 +41,8 @@ public class DefaultSparseDoubleVector1D extends AbstractSparseDoubleMatrix2D {
 	private int capacity;
 	private int valueCount;
 	private boolean transposed;
+	private StampedLock lock=new StampedLock();
+	
 
 	public DefaultSparseDoubleVector1D(DefaultSparseDoubleVector1D source) {
 		super(source.getRowCount(), source.getColumnCount());
@@ -73,12 +76,16 @@ public class DefaultSparseDoubleVector1D extends AbstractSparseDoubleMatrix2D {
 			VerifyUtil.verifyEquals(column, 0, "column must be 0");
 			pos = row;
 		}
-
-		int index = MathUtil.search(indices, 0, valueCount, pos);
-		if (index >= 0) {
-			return values[index];
-		} else {
-			return 0.0;
+		//not thread safe during write
+		long l=lock.readLock();
+		try{int index = MathUtil.search(indices, 0, valueCount, pos);
+			double ret=0;
+			if (index >= 0) {
+				ret=values[index];
+			}
+			return ret;
+		}finally{
+			lock.unlockRead(l);
 		}
 	}
 
@@ -91,8 +98,8 @@ public class DefaultSparseDoubleVector1D extends AbstractSparseDoubleMatrix2D {
 			VerifyUtil.verifyEquals(column, 0, "column must be 0");
 			pos = row;
 		}
-
-		synchronized (indices) {
+		long l=lock.writeLock();
+		try{
 			int index = MathUtil.search(indices, 0, valueCount, pos);
 			if (index >= 0) {
 				// value exists
@@ -125,6 +132,8 @@ public class DefaultSparseDoubleVector1D extends AbstractSparseDoubleMatrix2D {
 					valueCount++;
 				}
 			}
+		}finally{
+			lock.unlockWrite(l);
 		}
 	}
 

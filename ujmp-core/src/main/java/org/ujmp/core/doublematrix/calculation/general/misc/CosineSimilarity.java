@@ -42,6 +42,7 @@ public class CosineSimilarity extends AbstractDoubleCalculation {
 	}
 
 	public double getDouble(long... coordinates) {
+		//selection is thread safe
 		Matrix m1 = getSource().selectRows(Ret.LINK, coordinates[ROW]);
 		Matrix m2 = getSource().selectRows(Ret.LINK, coordinates[COLUMN]);
 		double aiSum = 0;
@@ -92,4 +93,8 @@ public class CosineSimilarity extends AbstractDoubleCalculation {
 		return aiSum / (Math.sqrt(a2Sum) * Math.sqrt(b2Sum));
 	}
 
+	@Override
+	public boolean isParallelFlag() {
+		return true;
+	}
 }

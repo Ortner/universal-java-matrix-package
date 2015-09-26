@@ -70,7 +70,11 @@ public class ImputeEM extends AbstractDoubleCalculation {
 
 	public double getDouble(long... coordinates) {
 		if (imputed == null) {
-			createMatrix();
+			synchronized (this) {
+				if (imputed == null) {
+					createMatrix();
+				}
+			}
 		}
 		double v = getSource().getAsDouble(coordinates);
 		if (MathUtil.isNaNOrInfinite(v)) {
@@ -80,6 +84,11 @@ public class ImputeEM extends AbstractDoubleCalculation {
 		}
 	}
 
+	@Override
+	public boolean isParallelFlag() {
+		return true;
+	}
+	
 	private void createMatrix() {
 		try {
 			ExecutorService executor = Executors.newFixedThreadPool(UJMPSettings.getInstance()

@@ -38,4 +38,8 @@ public class Log2 extends AbstractDoubleCalculation {
 		return Math.log(v) / Math.log(2.0);
 	}
 
+	@Override
+	public boolean isParallelFlag() {
+		return true;
+	}
 }

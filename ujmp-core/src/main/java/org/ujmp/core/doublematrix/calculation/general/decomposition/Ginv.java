@@ -1004,6 +1004,12 @@ public class Ginv extends AbstractDoubleCalculation {
 		throw new RuntimeException("this method should never be called: LINK not possible");
 	}
 
+	// get double not called!
+	@Override
+	public boolean isParallelFlag() {
+		return false;
+	}
+	
 	public DoubleMatrix calcLink() {
 		throw new RuntimeException("linking not possible, use ORIG or NEW");
 	}

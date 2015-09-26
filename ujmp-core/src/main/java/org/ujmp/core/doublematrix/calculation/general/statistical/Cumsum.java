@@ -41,14 +41,17 @@ public class Cumsum extends AbstractDoubleCalculation {
 
 	public double getDouble(long... coordinates) {
 		if (cumsum == null) {
+		synchronized(this){
+		if (cumsum == null) {
 			createMatrix();
-		}
+		}}}
 		return cumsum.getAsDouble(coordinates);
 	}
 
 	private void createMatrix() {
 		Matrix source = getSource();
 		Matrix m = Matrix.Factory.zeros(source.getSize());
+		//TODO stream for
 		for (long c = 0; c < source.getColumnCount(); c++) {
 			double sum = 0;
 			for (long r = 0; r < source.getRowCount(); r++) {
@@ -58,5 +61,11 @@ public class Cumsum extends AbstractDoubleCalculation {
 			}
 		}
 		cumsum = m;
+	}
+	
+	@Override
+	public boolean isParallelFlag() {
+		//TODO stream createMatrix
+		return true;
 	}
 }

@@ -100,6 +100,11 @@ public class Cov extends AbstractDoubleCalculation {
 		return cov;
 	}
 
+	@Override
+	public boolean isParallelFlag() {
+		return true;
+	}
+	
 	public long[] getSize() {
 		return size;
 	}

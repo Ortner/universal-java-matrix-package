@@ -45,4 +45,9 @@ public class FadeIn extends AbstractDoubleCalculation {
 		}
 		return getSource().getAsDouble(coordinates) * factor;
 	}
+
+	@Override
+	public boolean isParallelFlag() {
+		return true;
+	}
 }

@@ -91,8 +91,10 @@ public class ImputeKNN extends AbstractDoubleCalculation {
 
 	public double getDouble(long... coordinates) {
 		if (distanceMatrix == null) {
+		synchronized(this){
+		if (distanceMatrix == null) {
 			distanceMatrix = getDistanceMatrix();
-		}
+		}}}
 		double value = getSource().getAsDouble(coordinates);
 		if (MathUtil.isNaNOrInfinite(value)) {
 			List<Sortable<Double, Matrix>> sortedNeighbors = getSortedNeighbors(coordinates);
@@ -110,4 +112,8 @@ public class ImputeKNN extends AbstractDoubleCalculation {
 		}
 	}
 
+	@Override
+	public boolean isParallelFlag() {
+		return true;
+	}
 }

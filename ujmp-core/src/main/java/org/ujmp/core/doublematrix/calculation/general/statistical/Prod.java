@@ -112,6 +112,11 @@ public class Prod extends AbstractDoubleCalculation {
 
 	}
 
+	@Override
+	public boolean isParallelFlag() {
+		return true;
+	}
+	
 	public long[] getSize() {
 		switch (getDimension()) {
 		case ROW:
